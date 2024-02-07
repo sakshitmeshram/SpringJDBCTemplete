@@ -1,17 +1,15 @@
 package com.git.SpringJDBCTemplete.controller;
 
-import com.git.SpringJDBCTemplete.model.Employee;
+import com.git.SpringJDBCTemplete.entity.Employee;
 import com.git.SpringJDBCTemplete.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/")
@@ -27,8 +25,9 @@ public class EmployeeController {
         return new ResponseEntity<>(map,HttpStatus.OK);
     }
     @PostMapping("add")
-    public String addEmployee(@RequestBody Employee employee){
-        employeeService.saveEmployee(employee);
+    public String addEmployee(@RequestBody List<Employee> employeeList){
+        if(employeeList.isEmpty())return "Employee List is empty ";
+        employeeService.saveEmployee(employeeList);
         return "employee add in db successfully";
     }
 

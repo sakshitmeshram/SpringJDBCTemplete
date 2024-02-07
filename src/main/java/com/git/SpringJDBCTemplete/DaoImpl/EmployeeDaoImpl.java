@@ -1,6 +1,7 @@
-package com.git.SpringJDBCTemplete.repo;
+package com.git.SpringJDBCTemplete.DaoImpl;
 
-import com.git.SpringJDBCTemplete.model.Employee;
+import com.git.SpringJDBCTemplete.Dao.EmployeeDao;
+import com.git.SpringJDBCTemplete.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -8,23 +9,21 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class EmployeeRepoImpl implements EmployeeRepo{
+public class EmployeeDaoImpl implements EmployeeDao {
     @Autowired
     private  JdbcTemplate jdbcTemplate;
 
 
 
     @Override
-    public void save(Employee employee) {
+    public void save(List<Employee> employees) {
         String sql = "insert into employee(ID , name , department , salary) values (?,?,?,?)";
-        int row=jdbcTemplate.update(sql , employee.getID(),employee.getName()
-                ,employee.getDepartment(),employee.getSalary());
+        employees.stream().iterator().forEachRemaining(employee -> jdbcTemplate.update(sql , employee.getID(),employee.getName()
+                ,employee.getDepartment(),employee.getSalary()));
 
-        System.out.println(row +"rows affected");
     }
 
     @Override

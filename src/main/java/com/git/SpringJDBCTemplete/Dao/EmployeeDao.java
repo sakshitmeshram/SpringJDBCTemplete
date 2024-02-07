@@ -1,13 +1,13 @@
-package com.git.SpringJDBCTemplete.repo;
+package com.git.SpringJDBCTemplete.Dao;
 
-import com.git.SpringJDBCTemplete.model.Employee;
+import com.git.SpringJDBCTemplete.entity.Employee;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface EmployeeRepo {
+public interface EmployeeDao {
 
-    public void save(Employee employee);
+    public void save(List<Employee>employeeList);
 
     public List<Employee> findAll();
 

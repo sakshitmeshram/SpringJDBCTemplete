@@ -1,8 +1,10 @@
-package com.git.SpringJDBCTemplete.model;
+package com.git.SpringJDBCTemplete.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class Employee {
 
     private int ID;

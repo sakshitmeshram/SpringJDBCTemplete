@@ -1,7 +1,6 @@
 package com.git.SpringJDBCTemplete.service;
 
-import com.git.SpringJDBCTemplete.model.Employee;
-import org.springframework.stereotype.Service;
+import com.git.SpringJDBCTemplete.entity.Employee;
 
 import java.util.List;
 
@@ -10,5 +9,5 @@ public interface EmployeeService {
     public List<Employee> getEmployee();
     public List<Employee>getEmployeeByID(int ID);
 
-    public void saveEmployee(Employee employee);
+    public void saveEmployee(List<Employee>employeeList);
 }
