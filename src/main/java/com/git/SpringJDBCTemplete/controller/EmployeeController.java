@@ -25,18 +25,18 @@ public class EmployeeController {
         return new ResponseEntity<>(map,HttpStatus.OK);
     }
     @PostMapping("add")
-    public String addEmployee(@RequestBody List<Employee> employeeList){
-        if(employeeList.isEmpty())return "Employee List is empty ";
-        employeeService.saveEmployee(employeeList);
+    public String addEmployee(@RequestBody Employee employee){
+        if(employee.equals(null))return "Employee List is empty ";
+        employeeService.saveEmployee(employee);
         return "employee add in db successfully";
     }
 
     @GetMapping("list/{id}")
-    public ResponseEntity<Object> listOfEmploye(@PathVariable int id){
+    public ResponseEntity<Object> findById(@PathVariable int id){
         Map<String,Object> employeeMap = new HashMap<>();
         employeeMap.put("Employee",employeeService.getEmployeeByID(id));
 
-        if(employeeMap==null) throw new RuntimeException("user not found");
+        if(employeeMap.isEmpty()) throw new RuntimeException("user not found");
         return new ResponseEntity<>(employeeMap, HttpStatus.OK);
     }
 }

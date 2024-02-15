@@ -18,12 +18,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployeeByID(int ID) {
-        return employeeRepo.findByID(ID);
+    public Employee getEmployeeByID(int id) {
+        return employeeRepo.findByID(id);
     }
 
     @Override
-    public void saveEmployee(List<Employee>employeeList) {
-        employeeRepo.save(employeeList);
+    public void saveEmployee(Employee employee) {
+        employeeRepo.save(employee);
     }
 }

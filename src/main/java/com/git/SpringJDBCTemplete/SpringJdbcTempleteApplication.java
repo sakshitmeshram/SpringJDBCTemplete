@@ -8,21 +8,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringJdbcTempleteApplication implements CommandLineRunner {
+public class SpringJdbcTempleteApplication {
 	@Autowired
     private EmployeeService employeeService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringJdbcTempleteApplication.class, args);
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-			Employee employee = new Employee();
-			employee.setID(2);
-			employee.setName("ravi");
-			employee.setDepartment("IT");
-			employee.setSalary(80000);
-
 	}
 }

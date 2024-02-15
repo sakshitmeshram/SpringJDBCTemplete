@@ -7,9 +7,9 @@ import java.util.List;
 @Repository
 public interface EmployeeDao {
 
-    public void save(List<Employee>employeeList);
+    public void save(Employee employee);
 
     public List<Employee> findAll();
 
-    public List<Employee> findByID(int ID);
+    public Employee findByID(int ID);
 }
