@@ -1,11 +1,10 @@
 package com.git.SpringJDBCTemplete;
 
-import com.git.SpringJDBCTemplete.entity.Employee;
 import com.git.SpringJDBCTemplete.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 
 @SpringBootApplication
 public class SpringJdbcTempleteApplication {

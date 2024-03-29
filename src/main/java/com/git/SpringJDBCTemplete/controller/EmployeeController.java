@@ -7,16 +7,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/")
 public class EmployeeController {
 
-    @Autowired
+
     private EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService){
+        this.employeeService=employeeService;
+    }
 
     @GetMapping("list")
     public ResponseEntity<Object> listOfEmployee(){
@@ -25,10 +31,16 @@ public class EmployeeController {
         return new ResponseEntity<>(map,HttpStatus.OK);
     }
     @PostMapping("add")
-    public String addEmployee(@RequestBody Employee employee){
-        if(employee.equals(null))return "Employee List is empty ";
-        employeeService.saveEmployee(employee);
-        return "employee add in db successfully";
+    public ResponseEntity<Object> addEmployee(@RequestBody Employee employee){
+        if(Objects.isNull(employee))
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Employee is empty");
+
+        try {
+            employeeService.createEmployee(employee);
+            return ResponseEntity.status(HttpStatus.OK).body("Employee added to the database successfully");
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Failed to add employee to the database");
+        }
     }
 
     @GetMapping("list/{id}")

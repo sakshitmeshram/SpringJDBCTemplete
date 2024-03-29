@@ -24,22 +24,26 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public void save(Employee employee) {
 
-        String sql = "insert into employee(ID , name , department , salary) values (?,?,?,?)";
-        jdbcTemplate.update(sql , employee.getID(),employee.getName()
-                ,employee.getDepartment(),employee.getSalary());
+        String sql = "insert into employees(name , department , salary ) values (?,?,?)";
 
+        try{
+            jdbcTemplate.update(sql,employee.getName()
+                    ,employee.getDepartment(),employee.getSalary());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public List<Employee> findAll() {
-        String sql = "select * from employee";
+        String sql = "select * from employees";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Employee.class));
     }
 
     @Override
     public Employee findByID(int id) {
 
-        String sql = "select * from employee where ID=?";
+        String sql = "select * from employees where ID=?";
         return jdbcTemplate.queryForObject(sql , new Object[]{id},BeanPropertyRowMapper.newInstance(Employee.class));
     }
 }

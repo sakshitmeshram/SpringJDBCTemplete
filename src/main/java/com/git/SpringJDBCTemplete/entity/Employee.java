@@ -1,5 +1,6 @@
 package com.git.SpringJDBCTemplete.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ public class Employee {
     private String name;
     private String department;
     private int salary;
+    @JsonIgnore
     public int getID() {
         return ID;
     }
