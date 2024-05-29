@@ -1,0 +1,29 @@
+version: '4.30.0'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: sakshit
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"  # Host port 3307 mapped to container port 3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  app:
+    image: your-spring-boot-app-image
+    container_name: app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/sakshit
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-data:
