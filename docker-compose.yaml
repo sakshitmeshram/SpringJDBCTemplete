@@ -1,4 +1,4 @@
-version: '4.30.0'
+version: '3.8'
 services:
   mysql:
     image: mysql:8.0
@@ -10,9 +10,16 @@ services:
       - "3307:3306"  # Host port 3307 mapped to container port 3306
     volumes:
       - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      interval: 30s
+      retries: 3
+
 
   app:
-    image: your-spring-boot-app-image
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: app
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/sakshit
@@ -23,7 +30,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
 
 volumes:
   mysql-data:
